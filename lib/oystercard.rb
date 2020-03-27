@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Oystercard
-  attr_reader :balance, :entry_station, :journeys
+  attr_reader :balance, :entry_station, :journey_list
   CARD_LIMIT = 90
   MINIMUM_FUNDS = 1
-  AMOUNT = 1
+  MINIMUM_FARE = 1
 
   def initialize(balance = 0)
     @balance = 0
     @entry_station
-    @journeys = []
+    @journey_list = []
   end
 
   def top_up(amount)
@@ -24,9 +24,9 @@ class Oystercard
   end
 
   def touch_out(station)
-    deduct(AMOUNT)
+    deduct(MINIMUM_FARE)
     @entry_station = nil
-    @journey[:exit] = station
+    @current_journey[:exit] = station
   end
 
   def in_journey?
@@ -40,15 +40,9 @@ class Oystercard
   end
 
   def save_start_journey(station)
-    @journey = Hash.new
-    @journey[:entry] = station
-    @journeys.push(@journey)
+    @current_journey = Hash.new
+    @current_journey[:entry] = station
+    @journey_list.push(@current_journey)
   end
   
 end
-
-#When your tests are all green, refactor to remove the in_journey variable.
-#Rewrite the in_journey? method to infer its status based on whether or not there is an entry station
-
-
-

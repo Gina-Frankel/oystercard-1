@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'journey'
+
 class Oystercard
   attr_reader :balance, :entry_station, :journey_list
   CARD_LIMIT = 90
@@ -9,7 +11,7 @@ class Oystercard
 
   def initialize
     @balance = STARTING_BALANCE
-    @entry_station = nil
+    # @entry_station = nil
     @journey_list = []
   end
 
@@ -20,14 +22,19 @@ class Oystercard
 
   def touch_in(station)
     raise "insufficient balance" if @balance < MINIMUM_FUNDS
-    @entry_station = station
-    save_start_journey(station)
+    # @entry_station = station
+    @current_journey = Journey.new
+    @current_journey.start(station)
+    @journey_list << @current_journey
+    # save_start_journey(station)
   end
 
   def touch_out(station)
-    deduct(MINIMUM_FARE)
-    @entry_station = nil
-    @current_journey[:exit] = station
+    @current_journey.finish(station)
+    deduct(@current_journey.fare)
+    # @entry_station = nil
+    # @current_journey[:exit] = station
+
   end
 
   def in_journey?

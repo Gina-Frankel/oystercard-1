@@ -1,11 +1,12 @@
 require './lib/station'
+require './lib/journey'
 
 
 class Oystercard
   attr_reader :balance, :entry_station, :journeys
   CARD_LIMIT = 90
   MINIMUM_FUNDS = 1
-  #AMOUNT = 1
+  AMOUNT = 1
 
   def initialize(balance = 0)
     @balance = 0

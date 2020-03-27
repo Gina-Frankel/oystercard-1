@@ -13,4 +13,12 @@ class Journey
   def finish(station)
     @exit = station
   end
+
+  def fare
+    if !!@exit && !!@entry
+      1
+    else
+      6
+    end
+  end
 end

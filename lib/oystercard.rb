@@ -1,10 +1,11 @@
-# frozen_string_literal: true
+require './lib/station'
+
 
 class Oystercard
   attr_reader :balance, :entry_station, :journeys
   CARD_LIMIT = 90
   MINIMUM_FUNDS = 1
-  AMOUNT = 1
+  #AMOUNT = 1
 
   def initialize(balance = 0)
     @balance = 0
@@ -30,7 +31,7 @@ class Oystercard
   end
 
   def in_journey?
-    entry_station == nil ? false : true
+    @entry_station == nil ? false : true
   end
 
  private

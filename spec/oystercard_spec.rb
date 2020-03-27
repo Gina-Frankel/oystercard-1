@@ -27,7 +27,6 @@ describe Oystercard do
   end  
 
 
-
 context '#touch_in' do 
     it 'start journey' do
     expect(card).to respond_to(:touch_in).with(1).argument
@@ -37,7 +36,7 @@ context '#touch_in' do
   end
 
   it 'will not allow card to touch in  and will throw an error  if have less than one pound in balance' do
-    expect {card.touch_in('edgeware')}.to raise_error "insufficient balance"
+    expect { card.touch_in('edgeware')}.to raise_error "insufficient balance"
   end 
   it 'will save the  station to the entry_station on touch_in' do
     card.top_up(1)
@@ -52,8 +51,6 @@ context '#touch_in' do
     expect(card.journeys).to eq [{:entry => "edgeware", :exit => "waterloo"}]
   end
 end
-
-
 
 
   context '#touch_out' do 

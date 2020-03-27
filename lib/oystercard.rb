@@ -5,10 +5,11 @@ class Oystercard
   CARD_LIMIT = 90
   MINIMUM_FUNDS = 1
   MINIMUM_FARE = 1
+  STARTING_BALANCE = 0
 
-  def initialize(balance = 0)
-    @balance = 0
-    @entry_station
+  def initialize
+    @balance = STARTING_BALANCE
+    @entry_station = nil
     @journey_list = []
   end
 

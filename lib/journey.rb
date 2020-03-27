@@ -15,10 +15,6 @@ class Journey
   end
 
   def fare
-    if !!@exit && !!@entry
-      1
-    else
-      6
-    end
+    !!@exit && !!@entry ? 1 : 6
   end
 end
